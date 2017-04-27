@@ -186,6 +186,7 @@ module.exports = function(RED) {
         node.on("input", function(msg) {
             if (node.send_temp == "yes"){
                 HAT.send("temp:" + msg.payload.toString());
+                node.send({topic:"envirophat/tempdebug", payload:"debug"});
                 REDvInfo("Sending Command: temp :" + msg.payload.toString());
             }
         });
