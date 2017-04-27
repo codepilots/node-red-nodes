@@ -76,7 +76,7 @@ module.exports = function(RED) {
                 users.forEach(function(node){
                 	//Handle incomming messages from Python here
                 	
-                    if ( data.substring(0,6) == "temp" && node.send_temp ){
+                    if ( data.substring(0,4) == "temp" && node.send_temp ){
                         var msg = data.split(":")[1];
 
                         node.send({topic:"envirophat/temp", payload:Number(msg)});
@@ -184,9 +184,8 @@ module.exports = function(RED) {
         HAT.open(this);
         
         node.on("input", function(msg) {
-            if (node.send_temp == "yes"){
+            if (node.send_temp){
                 HAT.send("temp:" + msg.payload.toString());
-                node.send({topic:"envirophat/tempdebug", payload:"debug"});
                 REDvInfo("Sending Command: temp :" + msg.payload.toString());
             }
         });
