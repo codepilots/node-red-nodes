@@ -78,7 +78,7 @@ def handle_command(cmd):
 		# Read the temperature sensor from the Enviro pHAT
         if cmd.startswith("temp") in cmd:
             temp = round(weather.temperature(),2)
-			emit("temp:{}".format(temp))
+            emit("temp:{}".format(temp))
             return
 
         if cmd == "stop":
